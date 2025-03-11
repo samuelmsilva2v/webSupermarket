@@ -5,15 +5,19 @@ import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/
 
 export const routes: Routes = [
     {
-        path: 'pages/cadastro-produtos', //ROTA
-        component: CadastroProdutosComponent //COMPONENTE
+        path: 'pages/cadastro-produtos',
+        component: CadastroProdutosComponent
     },
     {
-        path: 'pages/consulta-produtos', //ROTA
-        component: ConsultaProdutosComponent //COMPONENTE
+        path: 'pages/consulta-produtos',
+        component: ConsultaProdutosComponent
     },
     {
-        path: 'pages/edicao-produtos', //ROTA
-        component: EdicaoProdutosComponent //COMPONENTE
+        path: 'pages/edicao-produtos',
+        component: EdicaoProdutosComponent
+    },
+    {
+        path: '', pathMatch: 'full',
+        redirectTo: 'pages/consulta-produtos'
     }
 ];
