@@ -8,10 +8,11 @@
                 </div>
 
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
                         <div class="mb-3">
                             <label for="nomeProduto" class="form-label">Nome do Produto</label>
-                            <input type="text" class="form-control" id="nomeProduto"
+                            <input type="text" formControlName="nome" class="form-control" id="nomeProduto"
                                 placeholder="Digite o nome do produto">
                         </div>
 
@@ -33,38 +34,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Produto 1</td>
-                                <td>R$ 100,00</td>
-                                <td>50</td>
-                                <td>Eletrônicos</td>
+                           <tr *ngFor="let p of produtos">
+                                <td>{{ p.nome }}</td>
+                                <td>{{ p.preco }}</td>
+                                <td>{{ p.quantidade }}</td>
+                                <td></td>
                                 <td class="text-center">
                                     <button class="btn btn-warning btn-sm me-1">Atualizar</button>
                                     <button class="btn btn-danger btn-sm">Excluir</button>
                                 </td>
-                            </tr>
-
-                            <tr>
-                                <td>Produto 2</td>
-                                <td>R$ 200,00</td>
-                                <td>30</td>
-                                <td>Roupas</td>
-                                <td class="text-center">
-                                    <button class="btn btn-warning btn-sm me-1">Atualizar</button>
-                                    <button class="btn btn-danger btn-sm">Excluir</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Produto 3</td>
-                                <td>R$ 50,00</td>
-                                <td>100</td>
-                                <td>Alimentos</td>
-                                <td class="text-center">
-                                    <button class="btn btn-warning btn-sm me-1">Atualizar</button>
-                                    <button class="btn btn-danger btn-sm">Excluir</button>
-                                </td>
-                            </tr>
+                           </tr>
                         </tbody>
                     </table>
                 </div>
