@@ -8,34 +8,56 @@
                 </div>
 
                 <div class="card-body">
-                    <form>
+
+                    <div *ngIf="mensagem" class="alert alert-success">
+                        <strong>Sucesso!</strong> Produto cadastrado com sucesso.
+                    </div>
+
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome do Produto</label>
-                            <input type="text" class="form-control" id="nome" placeholder="Digite o nome do produto"
-                                required>
+                            <input type="text" formControlName="nome" class="form-control" id="nome"
+                                placeholder="Digite o nome do produto" required>
+
+                            <div *ngIf="erros && erros.nome" class="text-danger">
+                                <strong>{{ erros.nome }}</strong>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="preco" class="form-label">Preço</label>
-                            <input type="number" class="form-control" id="preco" placeholder="Digite o preço do produto"
-                                required>
+                            <input type="number" formControlName="preco" class="form-control" id="preco"
+                                placeholder="Digite o preço do produto" required>
+
+                            <div *ngIf="erros && erros.preco" class="text-danger">
+                                <strong>{{ erros.preco }}</strong>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="quantidade" class="form-label">Quantidade</label>
-                            <input type="number" class="form-control" id="quantidade"
+                            <input type="number" formControlName="quantidade" class="form-control" id="quantidade"
                                 placeholder="Digite a quantidade do produto" required>
+
+                            <div *ngIf="erros && erros.quantidade" class="text-danger">
+                                <strong>{{ erros.quantidade }}</strong>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
-                            <select class="form-select" id="categoria" required>
+                            <select class="form-select" formControlName="categoriaId" id="categoria" required>
                                 <option value="" disabled selected>Selecione a categoria</option>
-                                
-                                <option *ngFor="let c of categorias">
+
+                                <option *ngFor="let c of categorias" value="{{ c.id }}">
                                     {{ c.nome }}
                                 </option>
                             </select>
+
+                            <div *ngIf="erros && erros.categoriaId" class="text-danger">
+                                <strong>{{ erros.categoriaId }}</strong>
+                            </div>  
                         </div>
 
                         <div class="mb-3">
