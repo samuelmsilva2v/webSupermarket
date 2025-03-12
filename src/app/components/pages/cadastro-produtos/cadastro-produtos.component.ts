@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { endpoints } from '../../../configurations/environment';
 
 @Component({
   selector: 'app-cadastro-produtos',
@@ -25,7 +26,7 @@ export class CadastroProdutosComponent {
 
   // Função executada ao abrir a página
   ngOnInit() {
-    this.http.get('http://localhost:8080/api/categorias')
+    this.http.get(endpoints.consultar_categorias)
       .subscribe({
         next: (data) => {
           this.categorias = data as any[];
@@ -43,7 +44,7 @@ export class CadastroProdutosComponent {
 
   // Função executada ao enviar o formulário
   onSubmit() {
-    this.http.post('http://localhost:8080/api/produtos', this.form.value, {responseType: 'text'})
+    this.http.post(endpoints.produto, this.form.value, {responseType: 'text'})
       .subscribe({
         next: (data) => {
           this.erros = null;
