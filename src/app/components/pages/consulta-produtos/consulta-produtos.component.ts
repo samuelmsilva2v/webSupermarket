@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { endpoints } from '../../../configurations/environment';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-consulta-produtos',
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './consulta-produtos.component.html',
   styleUrl: './consulta-produtos.component.css'
