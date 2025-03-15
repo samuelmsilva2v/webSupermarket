@@ -159,7 +159,7 @@ The system ensures that business rules are followed, such as mandatory categorie
 * When registering or editing a product, a category must be provided.
 
 ## Technologies Used
-
+#### Back-end:
 * Java 21
 * Spring Boot
 * Spring Data JPA
