@@ -1,8 +1,11 @@
-const apiUrl = "http://localhost:8080";
+const supermarketApi = "http://localhost:8080";
+const  apiLogin = "http://localhost:8081";
 
 export const endpoints = {
-    produto : `${apiUrl}/api/produtos/`,
-    consultar_produtos : `${apiUrl}/api/produtos/consultar`,
-    consultar_categorias : `${apiUrl}/api/categorias`,
-    dashboard_categorias : `${apiUrl}/api/dashboard/produtos-categoria`
+    produto : `${supermarketApi}/api/produtos/`,
+    consultar_produtos : `${supermarketApi}/api/produtos/consultar`,
+    consultar_categorias : `${supermarketApi}/api/categorias`,
+    dashboard_categorias : `${supermarketApi}/api/dashboard/produtos-categoria`,
+    autenticar_usuario : `${apiLogin}/api/usuario/autenticar`,
+    criar_usuario : `${apiLogin}/api/usuario/criar`
 };

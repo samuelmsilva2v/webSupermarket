@@ -3,8 +3,18 @@ import { EdicaoProdutosComponent } from './components/pages/edicao-produtos/edic
 import { ConsultaProdutosComponent } from './components/pages/consulta-produtos/consulta-produtos.component';
 import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/cadastro-produtos.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { AutenticarUsuarioComponent } from './components/pages/autenticar-usuario/autenticar-usuario.component';
+import { CriarUsuarioComponent } from './components/pages/criar-usuario/criar-usuario.component';
 
 export const routes: Routes = [
+    {
+        path: 'pages/autenticar-usuario',
+        component: AutenticarUsuarioComponent
+    },
+    {
+        path: 'pages/criar-usuario',
+        component: CriarUsuarioComponent
+    },
     {
         path: 'pages/dashboard',
         component: DashboardComponent
@@ -23,6 +33,6 @@ export const routes: Routes = [
     },
     {
         path: '', pathMatch: 'full',
-        redirectTo: 'pages/dashboard'
+        redirectTo: 'pages/autenticar-usuario'
     }
 ];
