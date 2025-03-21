@@ -1,1 +1,38 @@
-<p>autenticar-usuario works!</p>
+<div class="d-flex align-items-center justify-content-center mt-5">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+
+        <img src="https://img.freepik.com/vetores-premium/negocio-corporativo-profissional-online-shop-cricket-club-cricket-player-design-de-logotipo-iconico_698413-212.jpg?w=740" />
+
+        <h3 class="text-center mt-3">Autenticação de usuário</h3>
+        <p class="text-center">Entre com as suas credenciais</p>
+
+        <div *ngIf="mensagem" class="text-danger">
+            <strong>{{ mensagem }}</strong>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+
+                <div *ngIf="erros && erros.email" class="text-danger">
+                    <strong>{{ erros.email }}</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" formControlName="senha" class="form-control" id="password" placeholder="Digite sua senha" required>
+
+                <div *ngIf="erros && erros.senha" class="text-danger">
+                    <strong>{{ erros.senha }}</strong>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+
+        </form>
+
+    </div>
+</div>
