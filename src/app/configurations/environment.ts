@@ -1,4 +1,4 @@
-const supermarketApi = "http://localhost:8080";
+export const supermarketApi = "http://localhost:8080";
 const  apiLogin = "http://localhost:8081";
 
 export const endpoints = {
