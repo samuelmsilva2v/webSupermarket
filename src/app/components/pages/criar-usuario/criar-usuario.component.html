@@ -1,1 +1,53 @@
-<p>criar-usuario works!</p>
+<div class="d-flex align-items-center justify-content-center mt-3">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+
+        <h3 class="text-center">Cadastro de usuário</h3>
+        <p class="text-center">Entre com os seus dados</p>
+
+        <div *ngIf="mensagemSucesso" class="text-success text-center">
+            <strong>{{ mensagemSucesso }}</strong>
+        </div>
+
+        <div *ngIf="mensagemErro" class="text-danger text-center">
+            <strong>{{ mensagemErro }}</strong>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome do usuário</label>
+                <input type="text" formControlName="nome" class="form-control" id="nome" placeholder="Digite seu nome" required>
+
+                <div *ngIf="erros && erros.nome" class="text-danger">
+                    <strong>{{ erros.nome }}</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+
+                <div *ngIf="erros && erros.email" class="text-danger">
+                    <strong>{{ erros.email }}</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" formControlName="senha" class="form-control" id="password" placeholder="Digite sua senha" required>
+
+                <div *ngIf="erros && erros.senha" class="text-danger">
+                    <strong>{{ erros.senha }}</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="senhaConfirmacao" class="form-label">Confirme a senha</label>
+                <input type="password" formControlName="senhaConfirmacao" class="form-control" id="senhaConfirmacao" placeholder="Confirme sua senha" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Realizar Cadastro</button>
+        </form>
+
+    </div>
+</div>
