@@ -5,6 +5,7 @@ import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { AutenticarUsuarioComponent } from './components/pages/autenticar-usuario/autenticar-usuario.component';
 import { CriarUsuarioComponent } from './components/pages/criar-usuario/criar-usuario.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -17,19 +18,23 @@ export const routes: Routes = [
     },
     {
         path: 'pages/dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'pages/cadastro-produtos',
-        component: CadastroProdutosComponent
+        component: CadastroProdutosComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'pages/consulta-produtos',
-        component: ConsultaProdutosComponent
+        component: ConsultaProdutosComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'pages/edicao-produtos/:id',
-        component: EdicaoProdutosComponent
+        component: EdicaoProdutosComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: '', pathMatch: 'full',
