@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 
 @Component({
@@ -9,7 +10,8 @@ import { endpoints } from '../../../configurations/environment';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './autenticar-usuario.component.html',
   styleUrl: './autenticar-usuario.component.css'

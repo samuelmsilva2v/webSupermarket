@@ -1,69 +1,72 @@
-<div class="container mt-3">
+<div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
-                <div class="card-header">
-                    <h4 class="card-title">Edição de Produto</h4>
-                    <p class="card-subtitle">Utilize o formulário para modificar os dados do produto.</p>
+        <div class="col-lg-7">
+
+            <div class="mb-4">
+                <h2 class="fonte-titulo mb-1">Edição de produto</h2>
+                <p class="text-muted mb-0">Utilize o formulário para modificar os dados do produto.</p>
+            </div>
+
+            <div class="card card-etiqueta p-4">
+
+                <div *ngIf="mensagem" class="alert alert-success">
+                    <strong>Sucesso!</strong> Produto atualizado com sucesso.
                 </div>
 
-                <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Produto</label>
+                        <input type="text" formControlName="nome" class="form-control" id="nome"
+                            placeholder="Digite o nome do produto" required>
 
-                    <div *ngIf="mensagem" class="alert alert-success">
-                        <strong>Sucesso!</strong> Produto atualizado com sucesso.
+                        <div *ngIf="erros && erros.nome" class="text-danger">
+                            <strong>{{ erros.nome }}</strong>
+                        </div>
                     </div>
 
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome do Produto</label>
-                            <input type="text" formControlName="nome" class="form-control" id="nome"
-                                placeholder="Digite o nome do produto" required>
-
-                            <div *ngIf="erros && erros.nome" class="text-danger">
-                                <strong>{{ erros.nome }}</strong>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
                             <label for="preco" class="form-label">Preço</label>
-                            <input type="number" formControlName="preco" class="form-control" id="preco"
-                                placeholder="Digite o preço do produto" required>
+                            <input type="number" formControlName="preco" class="form-control numero" id="preco"
+                                placeholder="0,00" required>
 
                             <div *ngIf="erros && erros.preco" class="text-danger">
                                 <strong>{{ erros.preco }}</strong>
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="col-sm-6 mb-3">
                             <label for="quantidade" class="form-label">Quantidade</label>
-                            <input type="number" formControlName="quantidade" class="form-control" id="quantidade"
-                                placeholder="Digite a quantidade do produto" required>
+                            <input type="number" formControlName="quantidade" class="form-control numero" id="quantidade"
+                                placeholder="0" required>
 
                             <div *ngIf="erros && erros.quantidade" class="text-danger">
                                 <strong>{{ erros.quantidade }}</strong>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Categoria</label>
-                            <select class="form-select" formControlName="categoriaId" id="categoria" required>
-                                <option value="" disabled selected>Selecione a categoria</option>
+                    <div class="mb-4">
+                        <label for="categoria" class="form-label d-flex align-items-center gap-2">
+                            Categoria
+                            <span *ngIf="corSelecionada" class="ponto" [style.background-color]="corSelecionada"></span>
+                        </label>
+                        <select class="form-select" formControlName="categoriaId" id="categoria"
+                            (change)="onCategoriaChange()" required>
+                            <option value="" disabled selected>Selecione a categoria</option>
 
-                                <option *ngFor="let c of categorias" value="{{ c.id }}">
-                                    {{ c.nome }}
-                                </option>
-                            </select>
+                            <option *ngFor="let c of categorias" value="{{ c.id }}">
+                                {{ c.nome }}
+                            </option>
+                        </select>
 
-                            <div *ngIf="erros && erros.categoriaId" class="text-danger">
-                                <strong>{{ erros.categoriaId }}</strong>
-                            </div>
+                        <div *ngIf="erros && erros.categoriaId" class="text-danger">
+                            <strong>{{ erros.categoriaId }}</strong>
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-warning w-100">Atualizar Produto</button>
-                        </div>
-                    </form>
-                </div>
+                    <button type="submit" class="btn btn-warning w-100">Atualizar Produto</button>
+                </form>
             </div>
         </div>
     </div>

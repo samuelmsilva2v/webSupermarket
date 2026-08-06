@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { endpoints } from '../../../configurations/environment';
+import { corDaCategoria } from '../../../utils/categoria-cor';
 
 @Component({
   selector: 'app-cadastro-produtos',
@@ -20,6 +21,7 @@ export class CadastroProdutosComponent {
   categorias: any[] = [];
   erros: any = null;
   mensagem: string = '';
+  corSelecionada: string = '';
 
   // Construtores
   constructor(private http: HttpClient) { }
@@ -42,6 +44,12 @@ export class CadastroProdutosComponent {
     categoriaId: new FormControl('')
   });
 
+  // Atualiza a bolinha de cor ao trocar a categoria selecionada
+  onCategoriaChange() {
+    const categoria = this.categorias.find(c => c.id === this.form.value.categoriaId);
+    this.corSelecionada = categoria ? corDaCategoria(categoria.nome) : '';
+  }
+
   // Função executada ao enviar o formulário
   onSubmit() {
     this.http.post(endpoints.produto, this.form.value, {responseType: 'text'})
@@ -50,6 +58,7 @@ export class CadastroProdutosComponent {
           this.erros = null;
           this.mensagem = data;
           this.form.reset();
+          this.corSelecionada = '';
         },
         error: (e) => {
           this.erros = JSON.parse(e.error);

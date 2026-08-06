@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tokens de identidade visual "Mercado Fresco" */
+:root {
+  --cor-creme: #F6F1E7;
+  --cor-papel: #FBF8F2;
+  --cor-tinta: #2B2621;
+  --cor-oliva: #2F5233;
+  --cor-oliva-escura: #1F3B23;
+  --cor-terracota: #C1440E;
+
+  --fonte-titulo: "Fraunces", Georgia, serif;
+  --fonte-corpo: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --fonte-numero: "IBM Plex Mono", monospace;
+
+  /* Overrides das CSS custom properties do Bootstrap 5.3 (sem precisar de pipeline SCSS).
+     Este arquivo é carregado DEPOIS do bootstrap.min.css no angular.json para que estes
+     valores prevaleçam sobre os `:root` do próprio Bootstrap. */
+  --bs-body-font-family: var(--fonte-corpo);
+  --bs-body-bg: var(--cor-creme);
+  --bs-body-color: var(--cor-tinta);
+  --bs-primary: var(--cor-oliva);
+  --bs-primary-rgb: 47, 82, 51;
+  --bs-link-color: var(--cor-oliva);
+  --bs-link-color-rgb: 47, 82, 51;
+  --bs-link-hover-color: var(--cor-oliva-escura);
+  --bs-link-hover-color-rgb: 31, 59, 35;
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-lg: 0.75rem;
+  --bs-focus-ring-color: rgba(193, 68, 14, 0.35);
+}
+
+body {
+  background-color: var(--cor-creme);
+  color: var(--cor-tinta);
+}
+
+/* O Bootstrap compilado grava as cores de botão/dropdown/foco como valores literais
+   no CSS (não como referência a --bs-primary), então precisam ser sobrescritas
+   componente a componente. */
+.btn-primary {
+  --bs-btn-bg: var(--cor-oliva);
+  --bs-btn-border-color: var(--cor-oliva);
+  --bs-btn-hover-bg: var(--cor-oliva-escura);
+  --bs-btn-hover-border-color: var(--cor-oliva-escura);
+  --bs-btn-active-bg: var(--cor-oliva-escura);
+  --bs-btn-active-border-color: var(--cor-oliva-escura);
+  --bs-btn-disabled-bg: var(--cor-oliva);
+  --bs-btn-disabled-border-color: var(--cor-oliva);
+  --bs-btn-focus-shadow-rgb: 47, 82, 51;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--cor-terracota);
+  box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color);
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--cor-oliva);
+}
+
+h1, h2, h3, .fonte-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--cor-tinta);
+}
+
+.numero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-etiqueta {
+  position: relative;
+  background-color: var(--cor-papel);
+  border: none;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: 0 8px 20px -14px rgba(43, 38, 33, 0.35);
+}
+
+/* Bolinha de cor por categoria (ver src/app/utils/categoria-cor.ts) */
+.badge-categoria {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.ponto {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card-etiqueta {
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .card-etiqueta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -14px rgba(43, 38, 33, 0.4);
+  }
+}

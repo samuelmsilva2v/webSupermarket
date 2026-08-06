@@ -1,57 +1,55 @@
-<div class="container mt-3">
+<div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
-                <div class="card-header">
-                    <h4 class="card-title">Consulta de Produto</h4>
-                    <p class="card-subtitle">Utilize o formulário para pesquisar produtos.</p>
-                </div>
+        <div class="col-lg-9">
 
-                <div class="card-body">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <h2 class="fonte-titulo mb-1">Consulta de produtos</h2>
+                <p class="text-muted mb-0">Pesquise pelo nome para ver o que está no estoque.</p>
+            </div>
 
-                        <div class="mb-3">
-                            <label for="nomeProduto" class="form-label">Nome do Produto</label>
-                            <input type="text" formControlName="nome" class="form-control" id="nomeProduto"
-                                placeholder="Digite o nome do produto">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
-                    </form>
-                </div>
-
-            <div *ngIf="produtos.length > 0" class="card mt-4 shadow-lg">
-                <div class="card-body">
-
-                    <div *ngIf="mensagem" class="alert alert-success mb-2">
-                        <strong>Sucesso!</strong> {{ mensagem }}
+            <div class="card card-etiqueta p-4 mb-4">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex gap-2 align-items-end flex-wrap">
+                    <div class="flex-grow-1">
+                        <label for="nomeProduto" class="form-label">Nome do Produto</label>
+                        <input type="text" formControlName="nome" class="form-control" id="nomeProduto"
+                            placeholder="Digite o nome do produto">
                     </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </form>
+            </div>
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Preço</th>
-                                <th scope="col">Quantidade</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Categoria</th>
-                                <th scope="col" class="text-center">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           <tr *ngFor="let p of produtos">
-                                <td><strong>{{ p.nome }}</strong></td>
-                                <td>{{ p.preco }}</td>
-                                <td>{{ p.quantidade }}</td>
-                                <td>{{ p.preco * p.quantidade | currency: 'BRL' }}</td>
-                                <td>{{ p.categoria.nome | uppercase }}</td>
-                                <td class="text-center">
-                                    <button [routerLink]="['/pages/edicao-produtos', p.id]" class="btn btn-warning btn-sm me-1">Atualizar</button>
-                                    <button (click)="onDelete(p.id)" class="btn btn-danger btn-sm">Excluir</button>
-                                </td>
-                           </tr>
-                        </tbody>
-                    </table>
+            <div *ngIf="mensagem" class="alert alert-success">
+                <strong>Sucesso!</strong> {{ mensagem }}
+            </div>
+
+            <div class="row g-3" *ngIf="produtos.length > 0">
+                <div class="col-md-6 col-lg-4" *ngFor="let p of produtos">
+                    <div class="card card-etiqueta p-3 h-100 d-flex flex-column">
+                        <span class="badge-categoria mb-2">
+                            <span class="ponto" [style.background-color]="corDaCategoria(p.categoria.nome)"></span>
+                            {{ p.categoria.nome }}
+                        </span>
+
+                        <h5 class="mb-1">{{ p.nome }}</h5>
+
+                        <p class="numero mb-3">
+                            {{ p.preco | currency:'BRL' }} &middot; {{ p.quantidade }} un
+                            <br>
+                            <span class="text-muted">total {{ p.preco * p.quantidade | currency:'BRL' }}</span>
+                        </p>
+
+                        <div class="mt-auto d-flex gap-2">
+                            <button [routerLink]="['/pages/edicao-produtos', p.id]" class="btn btn-warning btn-sm flex-grow-1">Atualizar</button>
+                            <button (click)="onDelete(p.id)" class="btn btn-danger btn-sm flex-grow-1">Excluir</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <p *ngIf="produtos.length === 0" class="text-muted text-center mt-4">
+                Nenhum produto encontrado ainda. Pesquise pelo nome acima.
+            </p>
+
         </div>
+    </div>
+</div>

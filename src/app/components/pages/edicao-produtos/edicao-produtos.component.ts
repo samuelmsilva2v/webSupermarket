@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
+import { corDaCategoria } from '../../../utils/categoria-cor';
 
 @Component({
   selector: 'app-edicao-produtos',
@@ -22,6 +23,7 @@ export class EdicaoProdutosComponent {
   categorias: any[] = [];
   erros: any = null;
   mensagem: string = '';
+  corSelecionada: string = '';
 
   // Construtores
   constructor(
@@ -36,11 +38,11 @@ export class EdicaoProdutosComponent {
     this.http.get(`${endpoints.produto}${this.id}`)
       .subscribe({
         next: (data: any) => {
-          console.log("Produto carregado:", data);
           this.form.controls.nome.setValue(data.nome);
           this.form.controls.preco.setValue(data.preco);
           this.form.controls.quantidade.setValue(data.quantidade);
           this.form.controls.categoriaId.setValue(data.categoria.id);
+          this.corSelecionada = corDaCategoria(data.categoria.nome);
         }
       });
 
@@ -58,6 +60,12 @@ export class EdicaoProdutosComponent {
     quantidade: new FormControl(''),
     categoriaId: new FormControl('')
   })
+
+  // Atualiza a bolinha de cor ao trocar a categoria selecionada
+  onCategoriaChange() {
+    const categoria = this.categorias.find(c => c.id === this.form.value.categoriaId);
+    this.corSelecionada = categoria ? corDaCategoria(categoria.nome) : '';
+  }
 
   onSubmit() {
 

@@ -1,8 +1,17 @@
-<div class="d-flex align-items-center justify-content-center mt-3">
-    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+<div class="d-flex flex-column align-items-center justify-content-center mt-4 px-3">
 
-        <h3 class="text-center">Cadastro de usuário</h3>
-        <p class="text-center">Entre com os seus dados</p>
+    <div class="d-flex align-items-center gap-2 mb-4 text-primary">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 21c-4.97 0-9-4.03-9-9 0-6 6-10 15-10 0 9-4 10-10 10-2 0-3.5-.5-5-2"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="fonte-titulo fs-3">Supermercado</span>
+    </div>
+
+    <div class="card card-etiqueta p-4" style="width: 100%; max-width: 400px;">
+
+        <h3 class="fonte-titulo text-center mb-1">Cadastro de usuário</h3>
+        <p class="text-center text-muted">Entre com os seus dados</p>
 
         <div *ngIf="mensagemSucesso" class="text-success text-center">
             <strong>{{ mensagemSucesso }}</strong>
@@ -50,4 +59,9 @@
         </form>
 
     </div>
+
+    <p class="text-center mt-3 mb-5">
+        Já tem conta? <a routerLink="/pages/autenticar-usuario">Entrar</a>
+    </p>
+
 </div>

@@ -1,42 +1,43 @@
-<div class="container mt-3">
+<div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
+        <div class="col-lg-10">
 
-                <div class="card-header">
-                    <h4 class="card-title">Dashboard principal</h4>
-                    <p class="card-subtitle">Seja bem vindo ao sistema de controle de produtos.</p>
-                </div>
+            <div class="mb-4">
+                <h2 class="fonte-titulo mb-1">Olá, {{ nomeUsuario }}</h2>
+                <p class="text-muted mb-0">Aqui está o panorama do seu estoque hoje.</p>
+            </div>
 
-                <div class="card-body">
-                    <div class="row">
+            <div class="card card-etiqueta p-4">
+                <div class="row g-4 align-items-center">
 
-                        <div class="col-md-5">
-                            <table class="table">
+                    <div class="col-md-5">
+                        <table class="table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th class="text-end">Produtos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of dados">
+                                    <td>
+                                        <span class="badge-categoria">
+                                            <span class="ponto" [style.background-color]="corDaCategoria(item.nomeCategoria)"></span>
+                                            {{ item.nomeCategoria }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end numero">{{ item.qtdProdutos }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                <thead>
-                                    <tr>
-                                        <th>Categoria</th>
-                                        <th>Somatório de produtos</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr *ngFor="let item of dados">
-                                        <td> {{ item.nomeCategoria }} </td>
-                                        <td> {{ item.qtdProdutos }}</td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div [chart]="grafico"></div>
-                        </div>
+                    <div class="col-md-7">
+                        <div [chart]="grafico"></div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

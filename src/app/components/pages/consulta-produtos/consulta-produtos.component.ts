@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { endpoints } from '../../../configurations/environment';
 import { RouterLink } from '@angular/router';
+import { corDaCategoria } from '../../../utils/categoria-cor';
 
 @Component({
   selector: 'app-consulta-produtos',
@@ -21,6 +22,9 @@ export class ConsultaProdutosComponent {
   // Atributos
   produtos: any[] = [];
   mensagem: string = '';
+
+  // Exposto para uso no template
+  corDaCategoria = corDaCategoria;
 
   // Construtores
   constructor(private http: HttpClient) { }
