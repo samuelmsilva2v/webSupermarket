@@ -39,6 +39,10 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
 
 * Apenas um usuário cadastrado e autenticado pode acessar a API.
 
+* Não pode cadastrar um usuário com um e-mail já utilizado.
+
+* A senha do usuário deve conter letras maiúsculas, minúsculas, números e símbolos, com no mínimo 8 caracteres.
+
 ## Tecnologias Utilizadas
 #### Back-end:
 * Java 21
@@ -48,8 +52,7 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
 * JWT
 * SHA256 (para criptografia de senhas)
 * Hibernate
-* PostgreSQL (produtos e categorias)
-* MySQL (criação e autenticação de usuários)
+* PostgreSQL (produtos, categorias e usuários)
 * Docker (para virtualização do banco de dados)
 * JUnit (para testes unitários)
 * Swagger (para documentação)
@@ -86,6 +89,12 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
 |--------|------------------------------------|-----------------------------------------------|
 | GET    | `/api/dashboard/produto-categoria` | Consulta quantidade de produtos por categoria |
 
+- #### Usuário / Autenticação
+| Método | Endpoint                  | Descrição                                |
+|--------|----------------------------|-------------------------------------------|
+| POST   | `/api/usuario/criar`      | Cadastra um novo usuário                  |
+| POST   | `/api/usuario/autenticar` | Autentica um usuário e retorna um token   |
+
 ## Instalação e Configuração
 
 ### Pré-requisitos
@@ -93,8 +102,7 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
 - Java 21
 - Spring Boot
 - Angular CLI
-- MySQL Workbench
-- pgAdmin
+- pgAdmin (opcional, para inspecionar o banco PostgreSQL)
 
 **1. Clonar o Repositório do Back-end da Supermarket API**
 ```bash
@@ -102,7 +110,7 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
  cd supermarketAPI
 ```
 
-**2. Virtualizar o Banco de Dados da Supermarket API no Docker **
+**2. Virtualizar o Banco de Dados da Supermarket API no Docker**
 ```bash
 docker-compose up -d
 ```
@@ -111,37 +119,26 @@ docker-compose up -d
 ```bash
 mvn spring-boot:run
 ```
-A Supermarket API estará disponível em http://localhost:8080/swagger-ui/index.html#/.
+A Supermarket API — incluindo cadastro, login e autenticação de usuários, que agora fazem parte da própria API — estará disponível em http://localhost:8080/swagger-ui/index.html#/.
 
-**4. Clonar o Repositório do Back-end da API de Login**
-```bash
- git clone https://github.com/samuelmsilva2v/apiLogin
- cd apiLogin
-```
+Na primeira execução um usuário administrador padrão é criado automaticamente (configurável em `application.properties`, propriedades `app.admin.*`):
+- **E-mail:** `admin@supermarket.com`
+- **Senha:** `Admin@123`
 
-**5. Virtualizar o Banco de Dados da API de Login no Docker **
-```bash
-docker-compose up -d
-```
+> Essas são credenciais de desenvolvimento/estudo. Troque-as antes de qualquer uso além de testes locais.
 
-**6. Executar o Back-end da API de Login**
-```bash
-mvn spring-boot:run
-```
-A API de Login estará disponível em http://localhost:8081/swagger-ui/index.html#/.
-
-**7. Clonar o Repositório do Front-end**
+**4. Clonar o Repositório do Front-end**
 ```bash
  git clone https://github.com/samuelmsilva2v/webSupermarket.git
  cd webSupermarket
 ```
 
-**8. Instale as dependências do projeto:**
+**5. Instale as dependências do projeto:**
 ```bash
 npm install
 ```
 
-**9. Executar o front-end:**
+**6. Executar o front-end:**
 ```bash
 $ ng s -o 
 ```
@@ -200,6 +197,10 @@ The system ensures that business rules are followed, such as mandatory categorie
 
 * Only a registered and authenticated user can access the API.
 
+* A user cannot be registered with an e-mail that is already in use.
+
+* The user's password must contain uppercase and lowercase letters, numbers and symbols, with at least 8 characters.
+
 ## Technologies Used
 ### Back-end:
 * Java 21
@@ -209,8 +210,7 @@ The system ensures that business rules are followed, such as mandatory categorie
 * JWT
 * SHA256 (password encryption)
 * Hibernate
-* PostgreSQL (products and categories)
-* MySQL (user creation and authentication)
+* PostgreSQL (products, categories and users)
 * Docker (for database virtualization)
 * JUnit (for unit testing)
 * Swagger (for documentation)
@@ -247,6 +247,12 @@ The system ensures that business rules are followed, such as mandatory categorie
 |--------|------------------------------------|--------------------------------------------|
 | GET    | `/api/dashboard/produto-categoria` | Query the quantity of products by category |
 
+- #### User / Authentication
+| Method | Endpoint                  | Description                          |
+|--------|----------------------------|---------------------------------------|
+| POST   | `/api/usuario/criar`      | Registers a new user                  |
+| POST   | `/api/usuario/autenticar` | Authenticates a user and returns a token |
+
 ## Installation and Configuration
 
 ### Prerequisites
@@ -254,8 +260,7 @@ The system ensures that business rules are followed, such as mandatory categorie
 - Java 21
 - Spring Boot
 - Angular CLI
-- MySQL Workbench
-- pgAdmin
+- pgAdmin (optional, for inspecting the PostgreSQL database)
 
 **1. Clone the Back-end Repository for the Supermarket API**
 ```bash
@@ -272,37 +277,26 @@ docker-compose up -d
 ```bash
 mvn spring-boot:run
 ```
-The Supermarket API will be available at http://localhost:8080/swagger-ui/index.html#/.
+The Supermarket API — including user registration, login and authentication, which are now part of the API itself — will be available at http://localhost:8080/swagger-ui/index.html#/.
 
-**4. Clone the Back-end Repository for the Login API**
-```bash
- git clone https://github.com/samuelmsilva2v/apiLogin
- cd apiLogin
-```
+On the first run, a default admin user is created automatically (configurable in `application.properties`, `app.admin.*` properties):
+- **Email:** `admin@supermarket.com`
+- **Password:** `Admin@123`
 
-**5. Virtualize the Login API Database in Docker**
-```bash
-docker-compose up -d
-```
+> These are development/study credentials. Change them before any use beyond local testing.
 
-**6. Run the Back-end of the Login API**
-```bash
-mvn spring-boot:run
-```
-The Login API will be available at http://localhost:8081/swagger-ui/index.html#/.
-
-**7. Clone the Front-end Repository**
+**4. Clone the Front-end Repository**
 ```bash
 git clone https://github.com/samuelmsilva2v/webSupermarket.git
 cd webSupermarket
 ```
 
-**8. Install the project dependencies:**
+**5. Install the project dependencies:**
 ```bash
 npm install
 ```
 
-**9. Run the front-end:**
+**6. Run the front-end:**
 ```bash
 ng s -o
 ```

@@ -12,14 +12,18 @@ export const AuthInterceptor : HttpInterceptorFn = (req, next) => {
 
         // Acessar os dados do usuário autenticado na session storage
         var data = sessionStorage.getItem('usuario') as string;
-        var json = JSON.parse(data);
 
-        // Adicionando o TOKEN do usuário na requisição
-        const request = req.clone({
-            setHeaders: { Authorization : 'Bearer ' + json.token }
-        });
+        // Só anexar o TOKEN se já existir um usuário autenticado (evita quebrar login/cadastro)
+        if(data) {
+            var json = JSON.parse(data);
 
-        return next(request);
+            // Adicionando o TOKEN do usuário na requisição
+            const request = req.clone({
+                setHeaders: { Authorization : 'Bearer ' + json.token }
+            });
+
+            return next(request);
+        }
     }
 
     return next(req);
