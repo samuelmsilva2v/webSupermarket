@@ -1,0 +1,19 @@
+<div class="modal-backdrop-custom" *ngIf="open" (click)="onBackdropClick()">
+    <div class="modal-panel" role="dialog" aria-modal="true" [attr.aria-label]="title || null"
+        (click)="$event.stopPropagation()">
+
+        <div class="modal-panel-header" *ngIf="title">
+            <h2 class="modal-panel-title">{{ title }}</h2>
+            <button type="button" class="modal-panel-close" aria-label="Fechar" (click)="close()">&times;</button>
+        </div>
+
+        <div class="modal-panel-body">
+            <ng-content></ng-content>
+        </div>
+
+        <div class="modal-panel-footer">
+            <ng-content select="[modal-footer]"></ng-content>
+        </div>
+
+    </div>
+</div>

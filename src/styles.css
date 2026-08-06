@@ -48,6 +48,18 @@ body {
   --bs-btn-focus-shadow-rgb: 47, 82, 51;
 }
 
+.btn-danger {
+  --bs-btn-bg: var(--cor-terracota);
+  --bs-btn-border-color: var(--cor-terracota);
+  --bs-btn-hover-bg: #a3390b;
+  --bs-btn-hover-border-color: #a3390b;
+  --bs-btn-active-bg: #a3390b;
+  --bs-btn-active-border-color: #a3390b;
+  --bs-btn-disabled-bg: var(--cor-terracota);
+  --bs-btn-disabled-border-color: var(--cor-terracota);
+  --bs-btn-focus-shadow-rgb: 193, 68, 14;
+}
+
 .form-control:focus,
 .form-select:focus {
   border-color: var(--cor-terracota);

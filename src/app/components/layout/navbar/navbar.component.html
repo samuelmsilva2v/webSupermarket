@@ -54,3 +54,8 @@
         </div>
     </div>
 </nav>
+
+<app-confirm-modal [open]="exibirConfirmacaoLogout" title="Sair do sistema"
+    message="Deseja realmente sair do sistema?" confirmText="Sair" cancelText="Cancelar" variant="danger"
+    (confirmed)="confirmarLogout()" (cancelled)="cancelarLogout()">
+</app-confirm-modal>

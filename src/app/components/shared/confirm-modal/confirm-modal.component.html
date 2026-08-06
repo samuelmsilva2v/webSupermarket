@@ -1,0 +1,8 @@
+<app-modal [open]="open" [title]="title" (closed)="onCancel()">
+
+    <p class="confirm-modal-message">{{ message }}</p>
+
+    <button modal-footer type="button" class="btn btn-outline-secondary" (click)="onCancel()">{{ cancelText }}</button>
+    <button modal-footer type="button" class="btn" [ngClass]="confirmButtonClass" (click)="onConfirm()">{{ confirmText }}</button>
+
+</app-modal>

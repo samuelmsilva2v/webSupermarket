@@ -1,32 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-navbar',
   imports: [
     RouterLink,
-    CommonModule
+    CommonModule,
+    ConfirmModalComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
 
-  // Atributos
   isAuthenticated: boolean = false;
   nome: string = '';
   email: string = '';
   perfil: string = '';
+  exibirConfirmacaoLogout: boolean = false;
 
-  // Evento executado ao abrir o componente
   ngOnInit() {
-
-    // Verificar se os dados do usuário estão gravados na session storage
     if(sessionStorage.getItem('usuario') != null) {
       this.isAuthenticated = true;
 
-      // Ler os dados do usuário
       var data = sessionStorage.getItem('usuario') as string;
       var json = JSON.parse(data);
 
@@ -37,11 +35,17 @@ export class NavbarComponent {
   }
 
   logout() {
-    if(window.confirm('Deseja realmente sair do sistema?')) {
-      sessionStorage.removeItem('usuario');
-      location.href = '/pages/autenticar-usuario';
-    }
+    this.exibirConfirmacaoLogout = true;
   }
 
+  confirmarLogout() {
+    this.exibirConfirmacaoLogout = false;
+    sessionStorage.removeItem('usuario');
+    location.href = '/pages/autenticar-usuario';
+  }
+
+  cancelarLogout() {
+    this.exibirConfirmacaoLogout = false;
+  }
 
 }
