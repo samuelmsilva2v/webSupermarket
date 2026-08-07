@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { EdicaoProdutosComponent } from './components/pages/edicao-produtos/edicao-produtos.component';
 import { ConsultaProdutosComponent } from './components/pages/consulta-produtos/consulta-produtos.component';
 import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/cadastro-produtos.component';
+import { CadastroCategoriasComponent } from './components/pages/cadastro-categorias/cadastro-categorias.component';
+import { ConsultaCategoriasComponent } from './components/pages/consulta-categorias/consulta-categorias.component';
+import { EdicaoCategoriasComponent } from './components/pages/edicao-categorias/edicao-categorias.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { AutenticarUsuarioComponent } from './components/pages/autenticar-usuario/autenticar-usuario.component';
 import { CriarUsuarioComponent } from './components/pages/criar-usuario/criar-usuario.component';
@@ -36,6 +39,21 @@ export const routes: Routes = [
     {
         path: 'pages/edicao-produtos/:id',
         component: EdicaoProdutosComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'pages/cadastro-categorias',
+        component: CadastroCategoriasComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'pages/consulta-categorias',
+        component: ConsultaCategoriasComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'pages/edicao-categorias/:id',
+        component: EdicaoCategoriasComponent,
         canActivate: [AuthGuard]
     },
     {

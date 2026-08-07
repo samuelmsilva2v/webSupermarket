@@ -22,6 +22,10 @@
                 <strong>Sucesso!</strong> {{ mensagem }}
             </div>
 
+            <div *ngIf="erroExclusao" class="alert alert-danger">
+                <strong>Erro!</strong> {{ erroExclusao }}
+            </div>
+
             <div class="row g-3" *ngIf="produtos.length > 0">
                 <div class="col-md-6 col-lg-4" *ngFor="let p of produtos">
                     <div class="card card-etiqueta p-3 h-100 d-flex flex-column">

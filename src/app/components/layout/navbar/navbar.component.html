@@ -22,15 +22,23 @@
                     <a class="nav-link active" aria-current="page" routerLink="/pages/autenticar-usuario">Autenticar usuário</a>
                 </li>
 
+                <li class="nav-item" *ngIf="isAuthenticated">
+                    <a class="nav-link" routerLink="/pages/dashboard">Dashboard</a>
+                </li>
+
                 <li class="nav-item dropdown" *ngIf="isAuthenticated">
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Gerenciar produtos</a>
+                        aria-expanded="false">Gerenciar</a>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" routerLink="/pages/dashboard">Dashboard Produtos / Categorias</a></li>
+                        <li><h6 class="dropdown-header">Produtos</h6></li>
                         <li><a class="dropdown-item" routerLink="/pages/cadastro-produtos">Cadastrar produtos</a></li>
                         <li><a class="dropdown-item" routerLink="/pages/consulta-produtos">Consultar produtos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><h6 class="dropdown-header">Categorias</h6></li>
+                        <li><a class="dropdown-item" routerLink="/pages/cadastro-categorias">Cadastrar categorias</a></li>
+                        <li><a class="dropdown-item" routerLink="/pages/consulta-categorias">Consultar categorias</a></li>
                     </ul>
                 </li>
 

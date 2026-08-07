@@ -10,7 +10,7 @@
             <div class="card card-etiqueta p-4">
 
                 <div *ngIf="mensagem" class="alert alert-success">
-                    <strong>Sucesso!</strong> Produto cadastrado com sucesso.
+                    <strong>Sucesso!</strong> {{ mensagem }}
                 </div>
 
                 <div *ngIf="erroGeral" class="alert alert-danger">

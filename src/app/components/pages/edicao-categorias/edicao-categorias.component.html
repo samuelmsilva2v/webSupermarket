@@ -1,0 +1,46 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <div class="mb-4">
+                <h2 class="fonte-titulo mb-1">Edição de categoria</h2>
+                <p class="text-muted mb-0">Utilize o formulário para modificar o nome da categoria.</p>
+            </div>
+
+            <div class="card card-etiqueta p-4">
+
+                <div *ngIf="mensagem" class="alert alert-success">
+                    <strong>Sucesso!</strong> {{ mensagem }}
+                </div>
+
+                <div *ngIf="erroGeral" class="alert alert-danger">
+                    <strong>Erro!</strong> {{ erroGeral }}
+                </div>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-4">
+                        <div class="form-floating">
+                            <input type="text" formControlName="nome" class="form-control" id="nome"
+                                placeholder=" " required>
+                            <label for="nome">Nome da Categoria</label>
+                        </div>
+
+                        <app-erro-campo [controle]="form.controls.nome" [mensagens]="mensagensNome"
+                            [erroServidor]="erros?.nome"></app-erro-campo>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-outline-secondary w-100" (click)="voltar()">Voltar</button>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-warning w-100" [disabled]="form.invalid">Atualizar Categoria</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

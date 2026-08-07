@@ -83,10 +83,10 @@ export class CadastroProdutosComponent {
 
     this.http.post(endpoints.produto, this.form.value)
       .subscribe({
-        next: () => {
+        next: (data: any) => {
           this.erros = null;
           this.erroGeral = '';
-          this.mensagem = 'Produto cadastrado com sucesso.';
+          this.mensagem = `Produto "${data.nome}" cadastrado com sucesso.`;
           this.form.reset();
           this.corSelecionada = '';
         },

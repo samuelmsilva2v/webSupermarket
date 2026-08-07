@@ -24,6 +24,7 @@ export class ConsultaProdutosComponent {
   // Atributos
   produtos: any[] = [];
   mensagem: string = '';
+  erroExclusao: string = '';
   produtoIdParaExcluir: string | null = null;
   exibirConfirmacaoExclusao: boolean = false;
 
@@ -66,7 +67,12 @@ export class ConsultaProdutosComponent {
       .subscribe({
         next: (data) => {
           this.mensagem = data;
+          this.erroExclusao = '';
           this.onSubmit();
+        },
+        error: (e) => {
+          this.mensagem = '';
+          this.erroExclusao = typeof e.error === 'string' ? e.error : 'Não foi possível excluir o produto.';
         }
       });
 

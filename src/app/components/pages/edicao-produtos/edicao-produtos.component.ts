@@ -103,10 +103,10 @@ export class EdicaoProdutosComponent {
 
     this.http.put(`${endpoints.produto}/${this.id}`, this.form.value)
       .subscribe({
-        next: () => {
+        next: (data: any) => {
           this.erros = null;
           this.erroGeral = '';
-          this.mensagem = 'Produto atualizado com sucesso.';
+          this.mensagem = `Produto "${data.nome}" atualizado com sucesso.`;
         },
         error: (e) => {
           this.mensagem = '';
