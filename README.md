@@ -1,9 +1,9 @@
 # API Supermercado
-![GitHub repo size](https://img.shields.io/github/repo-size/samuelmsilva2v/webSupermarket?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/samuelmsilva2v/webSupermarket?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/samuelmsilva2v/webSupermarket?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/samuelmsilva2v/webSupermarket?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/samuelmsilva2v/webSupermarket?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/samuelmsilva2v/supermarket-web?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/samuelmsilva2v/supermarket-web?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/samuelmsilva2v/supermarket-web?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/samuelmsilva2v/supermarket-web?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/samuelmsilva2v/supermarket-web?style=for-the-badge)
 
 [🇺🇸 Read in English](#supermarket-api)
 
@@ -106,8 +106,8 @@ O sistema garante que as regras de negócio sejam seguidas, como a obrigatorieda
 
 **1. Clonar o Repositório do Back-end da Supermarket API**
 ```bash
- git clone https://github.com/samuelmsilva2v/supermarketAPI.git
- cd supermarketAPI
+ git clone https://github.com/samuelmsilva2v/supermarket-api.git
+ cd supermarket-api
 ```
 
 **2. Virtualizar o Banco de Dados da Supermarket API no Docker**
@@ -129,8 +129,8 @@ Na primeira execução um usuário administrador padrão é criado automaticamen
 
 **4. Clonar o Repositório do Front-end**
 ```bash
- git clone https://github.com/samuelmsilva2v/webSupermarket.git
- cd webSupermarket
+ git clone https://github.com/samuelmsilva2v/supermarket-web.git
+ cd supermarket-web
 ```
 
 **5. Instale as dependências do projeto:**
@@ -149,16 +149,6 @@ Para rodar os testes automatizados
 ```bash
 mvn test
 ```
-### Login
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/login.png)
-### Cadastro de usuário
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/cadastro-usuario.png)
-#### Dashboard Produtos / Categorias
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/dashboard.png)
-#### Página de cadastro de produtos
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/cadastro-produto.png)
-#### Página de pesquisa e consulta de produtos
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/pesquisa-produto.png)
 
 ---
 
@@ -264,8 +254,8 @@ The system ensures that business rules are followed, such as mandatory categorie
 
 **1. Clone the Back-end Repository for the Supermarket API**
 ```bash
- git clone https://github.com/samuelmsilva2v/supermarketAPI.git
- cd supermarketAPI
+ git clone https://github.com/samuelmsilva2v/supermarket-api.git
+ cd supermarket-api
 ```
 
 **2. Virtualize the Supermarket API Database in Docker**
@@ -287,8 +277,8 @@ On the first run, a default admin user is created automatically (configurable in
 
 **4. Clone the Front-end Repository**
 ```bash
-git clone https://github.com/samuelmsilva2v/webSupermarket.git
-cd webSupermarket
+git clone https://github.com/samuelmsilva2v/supermarket-web.git
+cd supermarket-web
 ```
 
 **5. Install the project dependencies:**
@@ -308,14 +298,3 @@ To run automated tests
 ```bash
 mvn test
 ```
-
-### Login
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/login.png)
-### User Signup
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/cadastro-usuario.png)
-#### Dashboard Products / Categories
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/dashboard.png)
-#### Product Registration Page
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/cadastro-produto.png)
-#### Product Search Page
-![](https://github.com/samuelmsilva2v/assets/blob/main/webSupermarket/pesquisa-produto.png)

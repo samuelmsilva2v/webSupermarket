@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "webSupermarket": {
+    "supermarket-web": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/web-supermarket",
+            "outputPath": "dist/supermarket-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "webSupermarket:build:production"
+              "buildTarget": "supermarket-web:build:production"
             },
             "development": {
-              "buildTarget": "webSupermarket:build:development"
+              "buildTarget": "supermarket-web:build:development"
             }
           },
           "defaultConfiguration": "development"
