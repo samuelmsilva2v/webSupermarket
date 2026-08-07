@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 import { corDaCategoria } from '../../../utils/categoria-cor';
 
@@ -25,17 +25,20 @@ export class EdicaoProdutosComponent {
   mensagem: string = '';
   corSelecionada: string = '';
 
+  @ViewChild('precoInput') precoInput!: ElementRef<HTMLInputElement>;
+
   // Construtores
   constructor(
     private http: HttpClient,
-    private activated: ActivatedRoute
+    private activated: ActivatedRoute,
+    private router: Router
   ) { }
 
   // Função executada ao abrir o componente
   ngOnInit() {
     this.id = this.activated.snapshot.paramMap.get('id') as string;
 
-    this.http.get(`${endpoints.produto}${this.id}`)
+    this.http.get(`${endpoints.produto}/${this.id}`)
       .subscribe({
         next: (data: any) => {
           this.form.controls.nome.setValue(data.nome);
@@ -43,6 +46,7 @@ export class EdicaoProdutosComponent {
           this.form.controls.quantidade.setValue(data.quantidade);
           this.form.controls.categoriaId.setValue(data.categoria.id);
           this.corSelecionada = corDaCategoria(data.categoria.nome);
+          this.formatarPreco(this.precoInput.nativeElement);
         }
       });
 
@@ -69,7 +73,7 @@ export class EdicaoProdutosComponent {
 
   onSubmit() {
 
-    this.http.put(`${endpoints.produto}${this.id}`, this.form.value, { responseType: 'text'})
+    this.http.put(`${endpoints.produto}/${this.id}`, this.form.value, { responseType: 'text'})
       .subscribe({
         next: (data) => {
           this.erros = null;
@@ -80,5 +84,18 @@ export class EdicaoProdutosComponent {
           this.mensagem = '';
         }
       });
+  }
+
+  voltar() {
+    this.router.navigate(['/pages/consulta-produtos']);
+  }
+
+  // Força a exibição do preço com 2 casas decimais ao sair do campo
+  formatarPreco(input: HTMLInputElement) {
+    const valor = parseFloat(input.value);
+
+    if (!isNaN(valor)) {
+      input.value = valor.toFixed(2);
+    }
   }
 }

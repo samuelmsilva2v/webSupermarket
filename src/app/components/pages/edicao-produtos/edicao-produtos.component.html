@@ -15,9 +15,11 @@
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome do Produto</label>
-                        <input type="text" formControlName="nome" class="form-control" id="nome"
-                            placeholder="Digite o nome do produto" required>
+                        <div class="form-floating">
+                            <input type="text" formControlName="nome" class="form-control" id="nome"
+                                placeholder=" " required>
+                            <label for="nome">Nome do Produto</label>
+                        </div>
 
                         <div *ngIf="erros && erros.nome" class="text-danger">
                             <strong>{{ erros.nome }}</strong>
@@ -26,9 +28,12 @@
 
                     <div class="row">
                         <div class="col-sm-6 mb-3">
-                            <label for="preco" class="form-label">Preço</label>
-                            <input type="number" formControlName="preco" class="form-control numero" id="preco"
-                                placeholder="0,00" required>
+                            <div class="form-floating">
+                                <input type="number" formControlName="preco" class="form-control numero" id="preco"
+                                    placeholder=" " step="0.01" required #precoInput (blur)="formatarPreco(precoInput)">
+                                <label for="preco">Preço</label>
+                            </div>
+                            <div class="form-text">Use vírgula para decimais, ex.: 9,90.</div>
 
                             <div *ngIf="erros && erros.preco" class="text-danger">
                                 <strong>{{ erros.preco }}</strong>
@@ -36,9 +41,11 @@
                         </div>
 
                         <div class="col-sm-6 mb-3">
-                            <label for="quantidade" class="form-label">Quantidade</label>
-                            <input type="number" formControlName="quantidade" class="form-control numero" id="quantidade"
-                                placeholder="0" required>
+                            <div class="form-floating">
+                                <input type="number" formControlName="quantidade" class="form-control numero" id="quantidade"
+                                    placeholder=" " required>
+                                <label for="quantidade">Quantidade</label>
+                            </div>
 
                             <div *ngIf="erros && erros.quantidade" class="text-danger">
                                 <strong>{{ erros.quantidade }}</strong>
@@ -47,25 +54,35 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="categoria" class="form-label d-flex align-items-center gap-2">
-                            Categoria
-                            <span *ngIf="corSelecionada" class="ponto" [style.background-color]="corSelecionada"></span>
-                        </label>
-                        <select class="form-select" formControlName="categoriaId" id="categoria"
-                            (change)="onCategoriaChange()" required>
-                            <option value="" disabled selected>Selecione a categoria</option>
+                        <div class="form-floating">
+                            <select class="form-select" formControlName="categoriaId" id="categoria"
+                                (change)="onCategoriaChange()" required>
+                                <option value="" disabled selected>Selecione a categoria</option>
 
-                            <option *ngFor="let c of categorias" value="{{ c.id }}">
-                                {{ c.nome }}
-                            </option>
-                        </select>
+                                <option *ngFor="let c of categorias" value="{{ c.id }}">
+                                    {{ c.nome }}
+                                </option>
+                            </select>
+                            <label for="categoria" class="d-flex align-items-center gap-2">
+                                Categoria
+                                <span *ngIf="corSelecionada" class="ponto" [style.background-color]="corSelecionada"></span>
+                            </label>
+                        </div>
 
                         <div *ngIf="erros && erros.categoriaId" class="text-danger">
                             <strong>{{ erros.categoriaId }}</strong>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-warning w-100">Atualizar Produto</button>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-outline-secondary w-100" (click)="voltar()">Voltar</button>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-warning w-100">Atualizar Produto</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

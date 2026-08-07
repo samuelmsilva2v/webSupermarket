@@ -16,6 +16,7 @@ import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.
 export class NavbarComponent {
 
   isAuthenticated: boolean = false;
+  isAdmin: boolean = false;
   nome: string = '';
   email: string = '';
   perfil: string = '';
@@ -31,6 +32,7 @@ export class NavbarComponent {
       this.nome = json.nome;
       this.email = json.email;
       this.perfil = json.perfil;
+      this.isAdmin = json.perfil === 'Administrador';
     }
   }
 

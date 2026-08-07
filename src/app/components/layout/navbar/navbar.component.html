@@ -22,10 +22,6 @@
                     <a class="nav-link active" aria-current="page" routerLink="/pages/autenticar-usuario">Autenticar usuário</a>
                 </li>
 
-                <li class="nav-item" *ngIf="!isAuthenticated">
-                    <a class="nav-link active" aria-current="page" routerLink="/pages/criar-usuario">Criar usuário</a>
-                </li>
-
                 <li class="nav-item dropdown" *ngIf="isAuthenticated">
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -36,6 +32,10 @@
                         <li><a class="dropdown-item" routerLink="/pages/cadastro-produtos">Cadastrar produtos</a></li>
                         <li><a class="dropdown-item" routerLink="/pages/consulta-produtos">Consultar produtos</a></li>
                     </ul>
+                </li>
+
+                <li class="nav-item" *ngIf="isAuthenticated && isAdmin">
+                    <a class="nav-link" routerLink="/pages/criar-usuario">Cadastrar usuário</a>
                 </li>
             </ul>
 

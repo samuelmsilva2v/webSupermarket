@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { AutenticarUsuarioComponent } from './components/pages/autenticar-usuario/autenticar-usuario.component';
 import { CriarUsuarioComponent } from './components/pages/criar-usuario/criar-usuario.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -14,7 +15,8 @@ export const routes: Routes = [
     },
     {
         path: 'pages/criar-usuario',
-        component: CriarUsuarioComponent
+        component: CriarUsuarioComponent,
+        canActivate: [AuthGuard, AdminGuard]
     },
     {
         path: 'pages/dashboard',

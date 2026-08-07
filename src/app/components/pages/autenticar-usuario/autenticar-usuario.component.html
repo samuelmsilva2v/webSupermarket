@@ -20,17 +20,21 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                <div class="form-floating">
+                    <input type="text" formControlName="username" class="form-control" id="username" placeholder=" " required>
+                    <label for="username">Username</label>
+                </div>
 
-                <div *ngIf="erros && erros.email" class="text-danger">
-                    <strong>{{ erros.email }}</strong>
+                <div *ngIf="erros && erros.username" class="text-danger">
+                    <strong>{{ erros.username }}</strong>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" formControlName="senha" class="form-control" id="password" placeholder="Digite sua senha" required>
+                <div class="form-floating">
+                    <input type="password" formControlName="senha" class="form-control" id="password" placeholder=" " required>
+                    <label for="password">Senha</label>
+                </div>
 
                 <div *ngIf="erros && erros.senha" class="text-danger">
                     <strong>{{ erros.senha }}</strong>
@@ -42,9 +46,5 @@
         </form>
 
     </div>
-
-    <p class="text-center mt-3 mb-5">
-        Ainda não tem conta? <a routerLink="/pages/criar-usuario">Cadastre-se</a>
-    </p>
 
 </div>

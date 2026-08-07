@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 
 @Component({
@@ -10,8 +9,7 @@ import { endpoints } from '../../../configurations/environment';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    RouterLink
+    ReactiveFormsModule
   ],
   templateUrl: './autenticar-usuario.component.html',
   styleUrl: './autenticar-usuario.component.css'
@@ -27,7 +25,7 @@ export class AutenticarUsuarioComponent {
 
   // Estrutura do formulário
   form = new FormGroup({
-    email : new FormControl('', [Validators.required, Validators.email]),
+    username : new FormControl('', [Validators.required]),
     senha : new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 

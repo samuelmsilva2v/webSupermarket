@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 import { corDaCategoria } from '../../../utils/categoria-cor';
 
@@ -24,7 +25,7 @@ export class CadastroProdutosComponent {
   corSelecionada: string = '';
 
   // Construtores
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Função executada ao abrir a página
   ngOnInit() {
@@ -65,5 +66,18 @@ export class CadastroProdutosComponent {
           this.mensagem = '';
         }
       });
+  }
+
+  voltar() {
+    this.router.navigate(['/pages/dashboard']);
+  }
+
+  // Força a exibição do preço com 2 casas decimais ao sair do campo
+  formatarPreco(input: HTMLInputElement) {
+    const valor = parseFloat(input.value);
+
+    if (!isNaN(valor)) {
+      input.value = valor.toFixed(2);
+    }
   }
 }

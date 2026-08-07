@@ -47,7 +47,7 @@ export class ConsultaProdutosComponent {
   // Função para enviar uma requisição de exclusão de produto para a API
   onDelete(id: string){
     if(confirm('Deseja realmente excluir o produto selecionado?')) {
-      this.http.delete(`${endpoints.produto}${id}`, { responseType: 'text' })
+      this.http.delete(`${endpoints.produto}/${id}`, { responseType: 'text' })
         .subscribe({
           next: (data) => {
             this.mensagem = data;

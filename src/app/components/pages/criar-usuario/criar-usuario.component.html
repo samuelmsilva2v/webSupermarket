@@ -8,10 +8,10 @@
         <span class="fonte-titulo fs-3">Supermercado</span>
     </div>
 
-    <div class="card card-etiqueta p-4" style="width: 100%; max-width: 400px;">
+    <div class="card card-etiqueta p-4" style="width: 100%; max-width: 600px;">
 
-        <h3 class="fonte-titulo text-center mb-1">Cadastro de usuário</h3>
-        <p class="text-center text-muted">Entre com os seus dados</p>
+        <h3 class="fonte-titulo text-center mb-1">Cadastrar usuário</h3>
+        <p class="text-center text-muted">Preencha os dados do novo usuário</p>
 
         <div *ngIf="mensagemSucesso" class="text-success text-center">
             <strong>{{ mensagemSucesso }}</strong>
@@ -23,45 +23,102 @@
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome do usuário</label>
-                <input type="text" formControlName="nome" class="form-control" id="nome" placeholder="Digite seu nome" required>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="text" formControlName="nome" class="form-control" id="nome" placeholder=" " required>
+                        <label for="nome">Nome</label>
+                    </div>
 
-                <div *ngIf="erros && erros.nome" class="text-danger">
-                    <strong>{{ erros.nome }}</strong>
+                    <div *ngIf="erros && erros.nome" class="text-danger">
+                        <strong>{{ erros.nome }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="text" formControlName="sobrenome" class="form-control" id="sobrenome" placeholder=" " required>
+                        <label for="sobrenome">Sobrenome</label>
+                    </div>
+
+                    <div *ngIf="erros && erros.sobrenome" class="text-danger">
+                        <strong>{{ erros.sobrenome }}</strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" formControlName="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="text" formControlName="username" class="form-control" id="username" placeholder=" " required>
+                        <label for="username">Username</label>
+                    </div>
 
-                <div *ngIf="erros && erros.email" class="text-danger">
-                    <strong>{{ erros.email }}</strong>
+                    <div *ngIf="erros && erros.username" class="text-danger">
+                        <strong>{{ erros.username }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="email" formControlName="email" class="form-control" id="email" placeholder=" " required>
+                        <label for="email">E-mail</label>
+                    </div>
+
+                    <div *ngIf="erros && erros.email" class="text-danger">
+                        <strong>{{ erros.email }}</strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" formControlName="senha" class="form-control" id="password" placeholder="Digite sua senha" required>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="password" formControlName="senha" class="form-control" id="password" placeholder=" " required>
+                        <label for="password">Senha</label>
+                    </div>
+                    <div class="form-text">Mín. 8 caracteres, com maiúscula, número e símbolo.</div>
 
-                <div *ngIf="erros && erros.senha" class="text-danger">
-                    <strong>{{ erros.senha }}</strong>
+                    <div *ngIf="erros && erros.senha" class="text-danger">
+                        <strong>{{ erros.senha }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <input type="password" formControlName="senhaConfirmacao" class="form-control" id="senhaConfirmacao" placeholder=" " required>
+                        <label for="senhaConfirmacao">Confirme a senha</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="senhaConfirmacao" class="form-label">Confirme a senha</label>
-                <input type="password" formControlName="senhaConfirmacao" class="form-control" id="senhaConfirmacao" placeholder="Confirme sua senha" required>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="form-floating">
+                        <select formControlName="perfil" class="form-select" id="perfil" required>
+                            <option value="Operador">Operador</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                        <label for="perfil">Perfil de acesso</label>
+                    </div>
+
+                    <div *ngIf="erros && erros.perfil" class="text-danger">
+                        <strong>{{ erros.perfil }}</strong>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Realizar Cadastro</button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-outline-secondary w-100" (click)="voltar()">Voltar</button>
+                </div>
+
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary w-100">Realizar Cadastro</button>
+                </div>
+            </div>
         </form>
 
     </div>
-
-    <p class="text-center mt-3 mb-5">
-        Já tem conta? <a routerLink="/pages/autenticar-usuario">Entrar</a>
-    </p>
 
 </div>

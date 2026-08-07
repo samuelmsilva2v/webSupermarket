@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 
 @Component({
@@ -10,8 +10,7 @@ import { endpoints } from '../../../configurations/environment';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    RouterLink
+    ReactiveFormsModule
   ],
   templateUrl: './criar-usuario.component.html',
   styleUrl: './criar-usuario.component.css'
@@ -24,11 +23,14 @@ export class CriarUsuarioComponent {
   erros: any = null;
 
   // Construtores
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   form = new FormGroup({
     nome: new FormControl(''),
+    sobrenome: new FormControl(''),
+    username: new FormControl(''),
     email: new FormControl(''),
+    perfil: new FormControl('Operador'),
     senha: new FormControl(''),
     senhaConfirmacao: new FormControl('')
   });
@@ -42,8 +44,8 @@ export class CriarUsuarioComponent {
       this.http.post(endpoints.criar_usuario, this.form.value)
         .subscribe({
           next: (data: any) => {
-            this.mensagemSucesso = `Parabéns, ${data.nome}. Sua conta foi criada com sucesso.`
-            this.form.reset();
+            this.mensagemSucesso = `Usuário ${data.nome} ${data.sobrenome} cadastrado com sucesso.`
+            this.form.reset({ perfil: 'Operador' });
           },
           error: (e) => {
             if(typeof e.error === "string") {
@@ -56,5 +58,9 @@ export class CriarUsuarioComponent {
     } else {
       this.mensagemErro = "Senhas não conferem, por favor verifique."
     }
+  }
+
+  voltar() {
+    this.router.navigate(['/pages/dashboard']);
   }
 }
