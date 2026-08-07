@@ -32,7 +32,7 @@ export class CadastroProdutosComponent {
 
   // Função executada ao abrir a página
   ngOnInit() {
-    this.http.get(endpoints.consultar_categorias)
+    this.http.get(endpoints.categoria)
       .subscribe({
         next: (data) => {
           this.categorias = data as any[];

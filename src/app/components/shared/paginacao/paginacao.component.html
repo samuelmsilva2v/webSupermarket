@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-4" *ngIf="totalElementos > 0">
+
+    <div class="d-flex align-items-center gap-2">
+        <label for="tamanhoPagina" class="text-muted small mb-0">Itens por página</label>
+        <select id="tamanhoPagina" class="form-select form-select-sm w-auto"
+            [ngModel]="tamanhoPagina" (ngModelChange)="onTamanhoChange($event)">
+            <option *ngFor="let t of tamanhosDisponiveis" [value]="t">{{ t }}</option>
+        </select>
+    </div>
+
+    <div class="text-muted small">
+        {{ totalElementos }} {{ totalElementos === 1 ? 'resultado' : 'resultados' }}
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="paginaAtual === 0"
+            (click)="irPara(paginaAtual - 1)">Anterior</button>
+        <span class="text-muted small">Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
+        <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="paginaAtual >= totalPaginas - 1"
+            (click)="irPara(paginaAtual + 1)">Próxima</button>
+    </div>
+
+</div>

@@ -4,7 +4,7 @@
 
             <div class="mb-4">
                 <h2 class="fonte-titulo mb-1">Consulta de produtos</h2>
-                <p class="text-muted mb-0">Pesquise pelo nome para ver o que está no estoque.</p>
+                <p class="text-muted mb-0">Filtre pelo nome para ver o que está no estoque.</p>
             </div>
 
             <div class="card card-etiqueta p-4 mb-4">
@@ -12,7 +12,7 @@
                     <div class="form-floating flex-grow-1">
                         <input type="text" formControlName="nome" class="form-control" id="nomeProduto"
                             placeholder=" ">
-                        <label for="nomeProduto">Nome do Produto</label>
+                        <label for="nomeProduto">Filtrar por nome</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Pesquisar</button>
                 </form>
@@ -51,8 +51,12 @@
             </div>
 
             <p *ngIf="produtos.length === 0" class="text-muted text-center mt-4">
-                Nenhum produto encontrado ainda. Pesquise pelo nome acima.
+                Nenhum produto encontrado.
             </p>
+
+            <app-paginacao [paginaAtual]="pagina" [totalPaginas]="totalPaginas" [totalElementos]="totalElementos"
+                [tamanhoPagina]="tamanho" (paginaMudou)="onPaginaMudou($event)" (tamanhoMudou)="onTamanhoMudou($event)">
+            </app-paginacao>
 
         </div>
     </div>

@@ -58,6 +58,6 @@ export const routes: Routes = [
     },
     {
         path: '', pathMatch: 'full',
-        redirectTo: 'pages/autenticar-usuario'
+        redirectTo: 'pages/dashboard'
     }
 ];

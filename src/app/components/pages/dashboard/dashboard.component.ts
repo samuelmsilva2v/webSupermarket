@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 import { Chart, ChartModule } from 'angular-highcharts';
 import { corDaCategoria } from '../../../utils/categoria-cor';
@@ -9,7 +10,8 @@ import { corDaCategoria } from '../../../utils/categoria-cor';
   selector: 'app-dashboard',
   imports: [
     CommonModule,
-    ChartModule
+    ChartModule,
+    RouterLink
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -20,12 +22,18 @@ export class DashboardComponent {
   dados: any[] = [];
   grafico: Chart = new Chart();
   nomeUsuario: string = '';
+  carregando: boolean = true;
 
   // Exposto para uso no template
   corDaCategoria = corDaCategoria;
 
   // Construtores
   constructor(private http: HttpClient) { }
+
+  // Verdadeiro se pelo menos uma categoria tiver produto em estoque
+  get temEstoque(): boolean {
+    return this.dados.some(item => item.qtdProdutos > 0);
+  }
 
   // Método executado ao abrir o componente
   ngOnInit() {
@@ -39,6 +47,11 @@ export class DashboardComponent {
       .subscribe({
         next: (data) => {
           this.dados = data as any[];
+          this.carregando = false;
+
+          if (!this.temEstoque) {
+            return;
+          }
 
           const conteudo = this.dados.map(item => ({
             name: item.nomeCategoria,

@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { endpoints } from '../../../configurations/environment';
 import { RouterLink } from '@angular/router';
 import { corDaCategoria } from '../../../utils/categoria-cor';
 import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.component';
+import { PaginacaoComponent } from '../../shared/paginacao/paginacao.component';
+import { PaginaResponse } from '../../../models/pagina-response.model';
 
 @Component({
   selector: 'app-consulta-produtos',
@@ -14,7 +17,8 @@ import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    PaginacaoComponent
   ],
   templateUrl: './consulta-produtos.component.html',
   styleUrl: './consulta-produtos.component.css'
@@ -28,25 +32,66 @@ export class ConsultaProdutosComponent {
   produtoIdParaExcluir: string | null = null;
   exibirConfirmacaoExclusao: boolean = false;
 
+  // Estado da paginação
+  pagina: number = 0;
+  tamanho: number = 10;
+  totalPaginas: number = 0;
+  totalElementos: number = 0;
+
   // Exposto para uso no template
   corDaCategoria = corDaCategoria;
 
   // Construtores
   constructor(private http: HttpClient) { }
 
-  // Formulário para capturar a pesquisa de produtos
+  // Formulário para filtrar produtos por nome
   form = new FormGroup({
-    nome : new FormControl('')
+    nome: new FormControl('')
   });
 
-  // Função para enviar os dados para a API
+  ngOnInit() {
+    this.carregarProdutos();
+
+    // Filtra automaticamente ao digitar; o botão de pesquisa força a busca na hora
+    this.form.controls.nome.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe(() => {
+        this.pagina = 0;
+        this.carregarProdutos();
+      });
+  }
+
   onSubmit() {
-    this.http.get(`${endpoints.consultar_produtos}/${this.form.value.nome}`)
+    this.pagina = 0;
+    this.carregarProdutos();
+  }
+
+  // Busca a página atual de produtos, aplicando o filtro por nome se houver
+  carregarProdutos() {
+    const params = new HttpParams()
+      .set('nome', this.form.value.nome ?? '')
+      .set('pagina', this.pagina)
+      .set('tamanho', this.tamanho);
+
+    this.http.get<PaginaResponse<any>>(endpoints.consultar_produtos, { params })
       .subscribe({
         next: (data) => {
-          this.produtos = data as any[];
+          this.produtos = data.conteudo;
+          this.totalPaginas = data.totalPaginas;
+          this.totalElementos = data.totalElementos;
         }
-      })
+      });
+  }
+
+  onPaginaMudou(novaPagina: number) {
+    this.pagina = novaPagina;
+    this.carregarProdutos();
+  }
+
+  onTamanhoMudou(novoTamanho: number) {
+    this.tamanho = novoTamanho;
+    this.pagina = 0;
+    this.carregarProdutos();
   }
 
   // Abre o modal de confirmação de exclusão de produto
@@ -68,7 +113,7 @@ export class ConsultaProdutosComponent {
         next: (data) => {
           this.mensagem = data;
           this.erroExclusao = '';
-          this.onSubmit();
+          this.carregarProdutos();
         },
         error: (e) => {
           this.mensagem = '';
