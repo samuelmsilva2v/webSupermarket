@@ -25,9 +25,8 @@
                     <label for="username">Username</label>
                 </div>
 
-                <div *ngIf="erros && erros.username" class="text-danger">
-                    <strong>{{ erros.username }}</strong>
-                </div>
+                <app-erro-campo [controle]="form.controls.username" [mensagens]="mensagensUsername"
+                    [erroServidor]="erros?.username"></app-erro-campo>
             </div>
 
             <div class="mb-3">
@@ -36,12 +35,11 @@
                     <label for="password">Senha</label>
                 </div>
 
-                <div *ngIf="erros && erros.senha" class="text-danger">
-                    <strong>{{ erros.senha }}</strong>
-                </div>
+                <app-erro-campo [controle]="form.controls.senha" [mensagens]="mensagensSenha"
+                    [erroServidor]="erros?.senha"></app-erro-campo>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Entrar</button>
 
         </form>
 

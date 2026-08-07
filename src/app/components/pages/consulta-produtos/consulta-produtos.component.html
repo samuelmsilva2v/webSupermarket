@@ -53,3 +53,8 @@
         </div>
     </div>
 </div>
+
+<app-confirm-modal [open]="exibirConfirmacaoExclusao" title="Excluir produto"
+    message="Deseja realmente excluir o produto selecionado?" confirmText="Excluir" cancelText="Cancelar"
+    variant="danger" (confirmed)="confirmarExclusao()" (cancelled)="cancelarExclusao()">
+</app-confirm-modal>

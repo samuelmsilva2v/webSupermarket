@@ -13,6 +13,10 @@
                     <strong>Sucesso!</strong> Produto cadastrado com sucesso.
                 </div>
 
+                <div *ngIf="erroGeral" class="alert alert-danger">
+                    <strong>Erro!</strong> {{ erroGeral }}
+                </div>
+
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                     <div class="mb-3">
@@ -22,9 +26,8 @@
                             <label for="nome">Nome do Produto</label>
                         </div>
 
-                        <div *ngIf="erros && erros.nome" class="text-danger">
-                            <strong>{{ erros.nome }}</strong>
-                        </div>
+                        <app-erro-campo [controle]="form.controls.nome" [mensagens]="mensagensNome"
+                            [erroServidor]="erros?.nome"></app-erro-campo>
                     </div>
 
                     <div class="row">
@@ -36,9 +39,8 @@
                             </div>
                             <div class="form-text">Use vírgula para decimais, ex.: 9,90.</div>
 
-                            <div *ngIf="erros && erros.preco" class="text-danger">
-                                <strong>{{ erros.preco }}</strong>
-                            </div>
+                            <app-erro-campo [controle]="form.controls.preco" [mensagens]="mensagensPreco"
+                                [erroServidor]="erros?.preco"></app-erro-campo>
                         </div>
 
                         <div class="col-sm-6 mb-3">
@@ -48,9 +50,8 @@
                                 <label for="quantidade">Quantidade</label>
                             </div>
 
-                            <div *ngIf="erros && erros.quantidade" class="text-danger">
-                                <strong>{{ erros.quantidade }}</strong>
-                            </div>
+                            <app-erro-campo [controle]="form.controls.quantidade" [mensagens]="mensagensQuantidade"
+                                [erroServidor]="erros?.quantidade"></app-erro-campo>
                         </div>
                     </div>
 
@@ -70,9 +71,8 @@
                             </label>
                         </div>
 
-                        <div *ngIf="erros && erros.categoriaId" class="text-danger">
-                            <strong>{{ erros.categoriaId }}</strong>
-                        </div>
+                        <app-erro-campo [controle]="form.controls.categoriaId" [mensagens]="mensagensCategoria"
+                            [erroServidor]="erros?.categoriaId"></app-erro-campo>
                     </div>
 
                     <div class="row">
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary w-100">Cadastrar Produto</button>
+                            <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Cadastrar Produto</button>
                         </div>
                     </div>
                 </form>

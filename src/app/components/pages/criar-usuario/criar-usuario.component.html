@@ -30,9 +30,8 @@
                         <label for="nome">Nome</label>
                     </div>
 
-                    <div *ngIf="erros && erros.nome" class="text-danger">
-                        <strong>{{ erros.nome }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.nome" [mensagens]="mensagensNome"
+                        [erroServidor]="erros?.nome"></app-erro-campo>
                 </div>
 
                 <div class="col-sm-6 mb-3">
@@ -41,9 +40,8 @@
                         <label for="sobrenome">Sobrenome</label>
                     </div>
 
-                    <div *ngIf="erros && erros.sobrenome" class="text-danger">
-                        <strong>{{ erros.sobrenome }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.sobrenome" [mensagens]="mensagensSobrenome"
+                        [erroServidor]="erros?.sobrenome"></app-erro-campo>
                 </div>
             </div>
 
@@ -54,9 +52,8 @@
                         <label for="username">Username</label>
                     </div>
 
-                    <div *ngIf="erros && erros.username" class="text-danger">
-                        <strong>{{ erros.username }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.username" [mensagens]="mensagensUsername"
+                        [erroServidor]="erros?.username"></app-erro-campo>
                 </div>
 
                 <div class="col-sm-6 mb-3">
@@ -65,9 +62,8 @@
                         <label for="email">E-mail</label>
                     </div>
 
-                    <div *ngIf="erros && erros.email" class="text-danger">
-                        <strong>{{ erros.email }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.email" [mensagens]="mensagensEmail"
+                        [erroServidor]="erros?.email"></app-erro-campo>
                 </div>
             </div>
 
@@ -79,15 +75,19 @@
                     </div>
                     <div class="form-text">Mín. 8 caracteres, com maiúscula, número e símbolo.</div>
 
-                    <div *ngIf="erros && erros.senha" class="text-danger">
-                        <strong>{{ erros.senha }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.senha" [mensagens]="mensagensSenha"
+                        [erroServidor]="erros?.senha"></app-erro-campo>
                 </div>
 
                 <div class="col-sm-6 mb-3">
                     <div class="form-floating">
                         <input type="password" formControlName="senhaConfirmacao" class="form-control" id="senhaConfirmacao" placeholder=" " required>
                         <label for="senhaConfirmacao">Confirme a senha</label>
+                    </div>
+
+                    <div *ngIf="form.errors?.['senhasDiferentes'] && (form.controls.senhaConfirmacao.touched || form.controls.senhaConfirmacao.dirty)"
+                        class="text-danger">
+                        <strong>Senhas não conferem, por favor verifique.</strong>
                     </div>
                 </div>
             </div>
@@ -102,9 +102,8 @@
                         <label for="perfil">Perfil de acesso</label>
                     </div>
 
-                    <div *ngIf="erros && erros.perfil" class="text-danger">
-                        <strong>{{ erros.perfil }}</strong>
-                    </div>
+                    <app-erro-campo [controle]="form.controls.perfil" [mensagens]="mensagensPerfil"
+                        [erroServidor]="erros?.perfil"></app-erro-campo>
                 </div>
             </div>
 
@@ -114,7 +113,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <button type="submit" class="btn btn-primary w-100">Realizar Cadastro</button>
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Realizar Cadastro</button>
                 </div>
             </div>
         </form>

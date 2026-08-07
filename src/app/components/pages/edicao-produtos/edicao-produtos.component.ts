@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { endpoints } from '../../../configurations/environment';
 import { corDaCategoria } from '../../../utils/categoria-cor';
+import { ErroCampoComponent } from '../../shared/erro-campo/erro-campo.component';
 
 @Component({
   selector: 'app-edicao-produtos',
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErroCampoComponent
   ],
   templateUrl: './edicao-produtos.component.html',
   styleUrl: './edicao-produtos.component.css'
@@ -23,6 +25,7 @@ export class EdicaoProdutosComponent {
   categorias: any[] = [];
   erros: any = null;
   mensagem: string = '';
+  erroGeral: string = '';
   corSelecionada: string = '';
 
   @ViewChild('precoInput') precoInput!: ElementRef<HTMLInputElement>;
@@ -59,11 +62,31 @@ export class EdicaoProdutosComponent {
   }
 
   form = new FormGroup({
-    nome: new FormControl(''),
-    preco: new FormControl(''),
-    quantidade: new FormControl(''),
-    categoriaId: new FormControl('')
+    nome: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    preco: new FormControl('', [Validators.required, Validators.min(0.01)]),
+    quantidade: new FormControl('', [Validators.required, Validators.min(0)]),
+    categoriaId: new FormControl('', [Validators.required])
   })
+
+  // Mensagens de validação exibidas pelo <app-erro-campo>, por campo
+  mensagensNome = {
+    required: 'O nome do produto é obrigatório.',
+    maxlength: 'O nome do produto deve ter no máximo 100 caracteres'
+  };
+
+  mensagensPreco = {
+    required: 'O preço do produto é obrigatório',
+    min: 'O preço do produto deve ser maior que zero'
+  };
+
+  mensagensQuantidade = {
+    required: 'A quantidade do produto é obrigatória',
+    min: 'A quantidade do produto não pode ser negativa'
+  };
+
+  mensagensCategoria = {
+    required: 'A categoria do produto é obrigatória'
+  };
 
   // Atualiza a bolinha de cor ao trocar a categoria selecionada
   onCategoriaChange() {
@@ -73,15 +96,27 @@ export class EdicaoProdutosComponent {
 
   onSubmit() {
 
-    this.http.put(`${endpoints.produto}/${this.id}`, this.form.value, { responseType: 'text'})
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.http.put(`${endpoints.produto}/${this.id}`, this.form.value)
       .subscribe({
-        next: (data) => {
+        next: () => {
           this.erros = null;
-          this.mensagem = data;
+          this.erroGeral = '';
+          this.mensagem = 'Produto atualizado com sucesso.';
         },
         error: (e) => {
-          this.erros = JSON.parse(e.error);
           this.mensagem = '';
+          if (typeof e.error === 'string') {
+            this.erros = null;
+            this.erroGeral = e.error;
+          } else {
+            this.erros = e.error;
+            this.erroGeral = '';
+          }
         }
       });
   }

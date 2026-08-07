@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { endpoints } from '../../../configurations/environment';
 import { RouterLink } from '@angular/router';
 import { corDaCategoria } from '../../../utils/categoria-cor';
+import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-consulta-produtos',
@@ -12,7 +13,8 @@ import { corDaCategoria } from '../../../utils/categoria-cor';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    ConfirmModalComponent
   ],
   templateUrl: './consulta-produtos.component.html',
   styleUrl: './consulta-produtos.component.css'
@@ -22,6 +24,8 @@ export class ConsultaProdutosComponent {
   // Atributos
   produtos: any[] = [];
   mensagem: string = '';
+  produtoIdParaExcluir: string | null = null;
+  exibirConfirmacaoExclusao: boolean = false;
 
   // Exposto para uso no template
   corDaCategoria = corDaCategoria;
@@ -44,16 +48,33 @@ export class ConsultaProdutosComponent {
       })
   }
 
-  // Função para enviar uma requisição de exclusão de produto para a API
-  onDelete(id: string){
-    if(confirm('Deseja realmente excluir o produto selecionado?')) {
-      this.http.delete(`${endpoints.produto}/${id}`, { responseType: 'text' })
-        .subscribe({
-          next: (data) => {
-            this.mensagem = data;
-            this.onSubmit();
-          }
-        });
+  // Abre o modal de confirmação de exclusão de produto
+  onDelete(id: string) {
+    this.produtoIdParaExcluir = id;
+    this.exibirConfirmacaoExclusao = true;
+  }
+
+  // Função para enviar a requisição de exclusão de produto para a API
+  confirmarExclusao() {
+    this.exibirConfirmacaoExclusao = false;
+
+    if (!this.produtoIdParaExcluir) {
+      return;
     }
+
+    this.http.delete(`${endpoints.produto}/${this.produtoIdParaExcluir}`, { responseType: 'text' })
+      .subscribe({
+        next: (data) => {
+          this.mensagem = data;
+          this.onSubmit();
+        }
+      });
+
+    this.produtoIdParaExcluir = null;
+  }
+
+  cancelarExclusao() {
+    this.exibirConfirmacaoExclusao = false;
+    this.produtoIdParaExcluir = null;
   }
 }
