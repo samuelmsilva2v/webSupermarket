@@ -1,4 +1,3 @@
-/* Tokens de identidade visual "Mercado Fresco" */
 :root {
   --cor-creme: #F6F1E7;
   --cor-papel: #FBF8F2;
@@ -11,9 +10,6 @@
   --fonte-corpo: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --fonte-numero: "IBM Plex Mono", monospace;
 
-  /* Overrides das CSS custom properties do Bootstrap 5.3 (sem precisar de pipeline SCSS).
-     Este arquivo é carregado DEPOIS do bootstrap.min.css no angular.json para que estes
-     valores prevaleçam sobre os `:root` do próprio Bootstrap. */
   --bs-body-font-family: var(--fonte-corpo);
   --bs-body-bg: var(--cor-creme);
   --bs-body-color: var(--cor-tinta);
@@ -28,14 +24,54 @@
   --bs-focus-ring-color: rgba(193, 68, 14, 0.35);
 }
 
+[data-bs-theme="dark"] {
+  --cor-creme: #1C1917;
+  --cor-papel: #26221F;
+  --cor-tinta: #EDE6DA;
+  --cor-oliva: #6FA377;
+  --cor-oliva-escura: #8FBB95;
+  --cor-terracota: #E2703C;
+
+  --bs-body-bg: var(--cor-creme);
+  --bs-body-color: var(--cor-tinta);
+  --bs-primary: var(--cor-oliva);
+  --bs-primary-rgb: 111, 163, 119;
+  --bs-link-color: var(--cor-oliva);
+  --bs-link-color-rgb: 111, 163, 119;
+  --bs-link-hover-color: var(--cor-oliva-escura);
+  --bs-link-hover-color-rgb: 143, 187, 149;
+  --bs-focus-ring-color: rgba(226, 112, 60, 0.35);
+}
+
+[data-bs-theme="dark"] .navbar-dark {
+  --bs-navbar-color: rgba(28, 25, 23, 0.85);
+  --bs-navbar-hover-color: #1C1917;
+  --bs-navbar-disabled-color: rgba(28, 25, 23, 0.45);
+  --bs-navbar-active-color: #1C1917;
+  --bs-navbar-brand-color: #1C1917;
+  --bs-navbar-brand-hover-color: #1C1917;
+  --bs-navbar-toggler-border-color: rgba(28, 25, 23, 0.35);
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231C1917' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+[data-bs-theme="dark"] .navbar-dark .btn-outline-light {
+  --bs-btn-color: #1C1917;
+  --bs-btn-border-color: #1C1917;
+  --bs-btn-hover-color: var(--cor-tinta);
+  --bs-btn-hover-bg: #1C1917;
+  --bs-btn-hover-border-color: #1C1917;
+  --bs-btn-active-color: var(--cor-tinta);
+  --bs-btn-active-bg: #1C1917;
+  --bs-btn-active-border-color: #1C1917;
+  --bs-btn-disabled-color: #1C1917;
+  --bs-btn-disabled-border-color: #1C1917;
+}
+
 body {
   background-color: var(--cor-creme);
   color: var(--cor-tinta);
 }
 
-/* O Bootstrap compilado grava as cores de botão/dropdown/foco como valores literais
-   no CSS (não como referência a --bs-primary), então precisam ser sobrescritas
-   componente a componente. */
 .btn-primary {
   --bs-btn-bg: var(--cor-oliva);
   --bs-btn-border-color: var(--cor-oliva);
@@ -48,6 +84,21 @@ body {
   --bs-btn-focus-shadow-rgb: 47, 82, 51;
 }
 
+[data-bs-theme="dark"] .btn-primary {
+  --bs-btn-color: var(--cor-creme);
+  --bs-btn-hover-color: var(--cor-creme);
+  --bs-btn-active-color: var(--cor-creme);
+  --bs-btn-bg: var(--cor-oliva);
+  --bs-btn-border-color: var(--cor-oliva);
+  --bs-btn-hover-bg: var(--cor-oliva-escura);
+  --bs-btn-hover-border-color: var(--cor-oliva-escura);
+  --bs-btn-active-bg: var(--cor-oliva-escura);
+  --bs-btn-active-border-color: var(--cor-oliva-escura);
+  --bs-btn-disabled-bg: var(--cor-oliva);
+  --bs-btn-disabled-border-color: var(--cor-oliva);
+  --bs-btn-focus-shadow-rgb: 111, 163, 119;
+}
+
 .btn-danger {
   --bs-btn-bg: var(--cor-terracota);
   --bs-btn-border-color: var(--cor-terracota);
@@ -58,6 +109,21 @@ body {
   --bs-btn-disabled-bg: var(--cor-terracota);
   --bs-btn-disabled-border-color: var(--cor-terracota);
   --bs-btn-focus-shadow-rgb: 193, 68, 14;
+}
+
+[data-bs-theme="dark"] .btn-danger {
+  --bs-btn-color: var(--cor-creme);
+  --bs-btn-hover-color: var(--cor-creme);
+  --bs-btn-active-color: var(--cor-creme);
+  --bs-btn-bg: var(--cor-terracota);
+  --bs-btn-border-color: var(--cor-terracota);
+  --bs-btn-hover-bg: #EE8F63;
+  --bs-btn-hover-border-color: #EE8F63;
+  --bs-btn-active-bg: #EE8F63;
+  --bs-btn-active-border-color: #EE8F63;
+  --bs-btn-disabled-bg: var(--cor-terracota);
+  --bs-btn-disabled-border-color: var(--cor-terracota);
+  --bs-btn-focus-shadow-rgb: 226, 112, 60;
 }
 
 .form-control:focus,
@@ -89,7 +155,10 @@ h1, h2, h3, .fonte-titulo {
   box-shadow: 0 8px 20px -14px rgba(43, 38, 33, 0.35);
 }
 
-/* Bolinha de cor por categoria (ver src/app/utils/categoria-cor.ts) */
+[data-bs-theme="dark"] .card-etiqueta {
+  box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.6);
+}
+
 .badge-categoria {
   display: inline-flex;
   align-items: center;
@@ -112,5 +181,9 @@ h1, h2, h3, .fonte-titulo {
   .card-etiqueta:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px -14px rgba(43, 38, 33, 0.4);
+  }
+
+  [data-bs-theme="dark"] .card-etiqueta:hover {
+    box-shadow: 0 12px 24px -14px rgba(0, 0, 0, 0.7);
   }
 }

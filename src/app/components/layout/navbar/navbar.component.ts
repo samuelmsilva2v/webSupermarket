@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.component';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +22,8 @@ export class NavbarComponent {
   email: string = '';
   perfil: string = '';
   exibirConfirmacaoLogout: boolean = false;
+
+  constructor(protected themeService: ThemeService) { }
 
   ngOnInit() {
     if(sessionStorage.getItem('usuario') != null) {
